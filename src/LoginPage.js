@@ -11,14 +11,15 @@ class LoginPage extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
+    const target = event.target
+    const value = target.type === 'username' ? target.username : target.password;
+    const name = target.name;
     this.setState(
       {
-        username: event.target.username,
-        password: event.target.password
+        [name]: value
       });
   }
 
@@ -36,9 +37,11 @@ class LoginPage extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Username:
-            <input type="text" value={this.state.username} onChange={this.handleChange} />
+            <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+          </label>
+          <label>
             Password:
-            <input type="text" value={this.state.password} onChange={this.handleChange} />
+            <input type="text" name="password" value={this.state.password} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
